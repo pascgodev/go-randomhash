@@ -1,8 +1,13 @@
 package randomhash
 
-// #include "RandomHash.h"
-
+/* 
+#cgo CFLAGS: -I./lib
+#cgo LDFLAGS: -lstdc++ -lrh 
+#include "bridge.h"
+#include <stdlib.h>
+*/
 import "C"
+
 import (
 	"math/big"
 	"unsafe"
@@ -36,7 +41,8 @@ func (rh *RandomHash) Search(block []byte, index int) uint64 {
 func (rh *RandomHash) CalcHash(block []byte, nonce uint64) *big.Int {
 	var in unsafe.Pointer = C.CBytes(block)
 	var out unsafe.Pointer = C.malloc(HashLength)
-	C.RandomHash_Simple((*C.uint8_t)(in), (*C.uint8_t)(out))
+	C.RandomHash_Simple((*C.uchar)(in), (*C.uchar)(out))
+	// C.test()
 	C.free(in)
 	C.free(out)
 
