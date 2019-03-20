@@ -2,7 +2,7 @@
 extern "C" {
 #endif
 
-    void RandomHash_Simple(unsigned char in, unsigned char out);
+    void RandomHash_Simple2(unsigned char *in, unsigned char *out);
 
 #ifdef __cplusplus    
 }
